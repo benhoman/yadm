@@ -1,0 +1,9 @@
+session_name: commhub
+
+start_directory: ~/src/github.com/bhoman-ca/communication-hub
+
+windows:
+  - window_name: code
+  - window_name: ai
+  - window_name: infra
+  - window_name: docker

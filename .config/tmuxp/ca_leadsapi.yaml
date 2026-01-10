@@ -1,0 +1,9 @@
+session_name: leadsapi
+
+start_directory: ~/src/github.com/bhoman-ca/leads-api
+
+windows:
+  - window_name: code
+  - window_name: ai
+  - window_name: infra
+  - window_name: docker

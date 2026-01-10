@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ca ruff:*)",
+      "Bash(ruff:*)",
+      "Bash(ca pytest:*)",
+      "Bash(pytest:*)"
+    ],
+    "additionalDirectories": [
+      "/home/bhoman/vaults/consumeraffairs/Tickets/Specs/"
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "notify-send 'Claude Code' 'Awaiting your input'"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "tsd-workflow@ca-marketplace": true
+  }
+}

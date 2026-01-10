@@ -1,0 +1,120 @@
+function pssh () {
+    podman run --rm -it -v $HOME/.ssh:/root/.ssh:z bhoman/ssh ssh "$@"
+}
+
+function socks_proxy () {
+    podman run --rm -it \
+        -v $HOME/.ssh:/root/.ssh:z \
+        -p 127.0.0.1:8787:8787 \
+        bhoman/ssh ssh jumpbox.proxy
+}
+
+function socks_proxy_home () {
+    podman run --rm -it \
+        -v $HOME/.ssh:/root/.ssh:z \
+        -p 127.0.0.1:8989:8989 \
+        bhoman/ssh ssh home.proxy
+}
+
+function tb () {
+    if [ $# -eq 0 ]; then
+        toolbox enter
+    else
+        toolbox "$@"
+    fi
+}
+
+function num_args () {
+    echo "$#"
+}
+
+function pyclean () {
+    sudo find . -type f -name '*.py[co]' -delete -o -type d -name __pycache__ -delete
+}
+
+function python_throwaway () {
+    THROWAWAY_DIR=$(mktemp -d -t virtualenv-XXXXXXX)
+    cd $THROWAWAY_DIR
+    python3 -m venv .
+    source bin/activate
+    # trap "rm -r $THROWAWAY_DIR" EXIT
+}
+
+function get_latest_github_release () {
+    curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/$1/releases/latest | grep '"tag_name":' | cut -d'"' -f4
+}
+
+function twingate_auth () {
+    xdg-open "$(twingate status | grep -Eo "https://[^ >]+" | head -n1)"
+}
+
+function tmux_attach () {
+    # Check if tmux is available
+    if ! command -v tmux >/dev/null 2>&1; then
+        echo "Error: tmux is not installed or not in PATH" >&2
+        return 1
+    fi
+
+    # Check if fzf is available (only needed if no argument provided)
+    if [ $# -eq 0 ] && ! command -v fzf >/dev/null 2>&1; then
+        echo "Error: fzf is required when no session name is provided" >&2
+        return 1
+    fi
+
+    # If session name provided as argument, try to attach directly
+    if [ $# -eq 1 ]; then
+        session_name="$1"
+        if tmux has-session -t "$session_name" 2>/dev/null; then
+            tmux attach-session -t "$session_name"
+        else
+            # Session doesn't exist, try to find and launch with tmuxp
+            if command -v tmuxp >/dev/null 2>&1; then
+                # Find closest matching tmuxp config
+                closest_match=$(tmuxp ls 2>/dev/null | grep "$session_name" | head -n1)
+
+                if [ -n "$closest_match" ]; then
+                    echo "Found tmuxp config: $closest_match"
+                    tmuxp load "$closest_match"
+                else
+                    echo "Error: tmux session '$session_name' does not exist and no matching tmuxp config found" >&2
+                    return 1
+                fi
+            else
+                echo "Error: tmux session '$session_name' does not exist and tmuxp is not installed" >&2
+                return 1
+            fi
+        fi
+        return 0
+    fi
+
+    # If no arguments, get list of sessions and use fzf to select
+    if [ $# -eq 0 ]; then
+        # Get list of tmux sessions
+        sessions=$(tmux list-sessions -F "#{session_name}" 2>/dev/null)
+
+        # Check if there are any sessions
+        if [ -z "$sessions" ]; then
+            echo "No active tmux sessions found" >&2
+            return 1
+        fi
+
+        # Use fzf to select session
+        selected_session=$(echo "$sessions" | fzf --prompt="Select tmux session: " --height=40% --reverse)
+
+        # Check if user made a selection
+        if [ -z "$selected_session" ]; then
+            echo "No session selected" >&2
+            return 1
+        fi
+
+        # Attach to selected session
+        tmux attach-session -t "$selected_session"
+        return 0
+    fi
+
+    # Too many arguments
+    echo "Usage: tmux_attach [session_name]" >&2
+    return 1
+}
+
+function ta { tmux_attach "$@"; }

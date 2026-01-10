@@ -1,0 +1,70 @@
+[user]
+  email = ben@benhoman.com
+  name = Ben Homan
+
+[includeIf "gitdir:~/src/github.com/bhoman-ca/"]
+  path = ~/.config/git/ca
+
+[includeIf "gitdir:~/src/github.com/consumeraffairs/"]
+  path = ~/.config/git/ca
+
+[includeIf "gitdir:~/Work/consumeraffairs/"]
+  path = ~/.config/git/ca
+
+[includeIf "gitdir:~/src/github.com/bhoman-nboe/"]
+  path = ~/.config/git/nboe
+
+[alias]
+  st = status
+  s = status
+  ci = commit
+  cia = commit --all
+  co = checkout
+  b = branch
+  nb = checkout -b
+  d = diff
+  dc = diff --cached
+  ammend = commit --amend
+  lol = log --graph --decorate --pretty=oneline --abbrev=commit
+  unstage = reset HEAD --
+
+  # git pr <remote> <pull request>
+  pr = "!f() { git fetch -fu $1 refs/pull/$2/head:pr/$2; git checkout pr/$2; } ; f"
+  prc = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+
+[core]
+  excludesfile = ~/.config/git/ignore
+  editor = /usr/bin/nvim
+
+[diff]
+  algorithm = histogram   # Clearer diffs on moved/edited lines
+	colorMoved = plain      # Highlight moved blocks in diffs
+	mnemonicPrefix = true   # More intuitive refs in diff output
+
+[column]
+	ui = auto 			    # Output in columns when possible
+
+[branch]
+	sort = -committerdate   # Sort branches by most recent commit first
+
+[tag]
+	sort = -version:refname  # Sort version numbers as you would expect
+
+[rerere]
+	enabled = true          # Record and reuse conflict resolutions
+	autoupdate = true       # Apply stored conflict resolutions automatically
+
+[pager]
+  branch = bat
+
+[pull]
+  rebase = true
+
+[init]
+  defaultBranch = main
+
+[filter "lfs"]
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f

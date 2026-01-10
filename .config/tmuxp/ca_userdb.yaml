@@ -1,0 +1,9 @@
+session_name: userdb
+
+start_directory: ~/src/github.com/bhoman-ca/userdb
+
+windows:
+  - window_name: code
+  - window_name: ai
+  - window_name: infra
+  - window_name: docker

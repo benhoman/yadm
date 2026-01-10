@@ -1,0 +1,9 @@
+session_name: reviews-api
+
+start_directory: ~/src/github.com/bhoman-ca/reviews-api
+
+windows:
+  - window_name: code
+  - window_name: ai
+  - window_name: infra
+  - window_name: docker

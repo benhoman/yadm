@@ -1,0 +1,11 @@
+session_name: mainsite
+
+start_directory: ~/src/github.com/bhoman-ca/mainsite/
+
+windows:
+  - window_name: code
+  - window_name: ai
+  - window_name: infra
+  - window_name: docker
+  - window_name: lazygit
+    # start_directory: src  # relative path to root

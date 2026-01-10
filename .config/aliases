@@ -1,0 +1,91 @@
+# General
+alias sudo="sudo "
+alias e="nvim"
+alias vim="nvim"
+alias nf="neofetch"
+# alias weechat="ssh -t home tmux attach -d"
+# alias weechat_mosh="mosh weechat --no-init tmux attach"
+# alias weechat_local="podman run --rm -it --name weechat -e UID=1548 -e GID=1548 --security-opt label=disable -v ~/.config/weechat:/weechat/.weechat jkaberg/weechat"
+# alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+alias l='eza'
+alias ll='eza -lah'
+alias lm='eza -lah --color=always | less -r'
+alias ls="eza -lh --group-directories-first --icons=auto"
+alias la='ls -a'
+alias lt="eza --tree --level=2 --long --icons --git"
+alias lta='lt -a'
+alias tree='eza --tree'
+
+# alias fd='fdfind'
+# alias bat='batcat'
+# alias cat='batcat --style=plain'
+alias sway_tree='swaymsg -t get_tree | jq -C | less -R'
+
+# cd Aliases
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+# Copy with progress bar
+
+alias cpv='rsync -ah --info=progress2'
+# Git
+alias gpuq="git pull upstream qa"
+alias cg='cd `git rev-parse --show-toplevel`' # cd root of git repo
+alias g="git"
+alias gd="git diff"
+alias gs="git status"
+alias gw="git worktree"
+alias gwa="gw add"
+alias gwl="gw list"
+alias gwp="gw prune"
+alias gwr="gw remove"
+alias gcb='git checkout $(git branch | fzf)'
+
+
+# Count files in directory
+alias count='find . -type f | wc -l'
+alias counttop='find . -maxdepth 1 -type f | wc -l'
+
+# SimpleHTTPServer
+alias servethis="python3 -m http.server"
+
+# Systemd
+alias uctl="systemctl --user"
+alias ujtl="journalctl --user"
+
+# Pacman
+# alias pacnew='rg pacnew /var/log/pacman.log'
+# alias pacnew='fd .pacnew /etc'
+
+# Python
+alias pycleanup='find . -type f -name "*.py[co]" -delete -or -type d -name "__pycache__" -delete'
+
+# Docker
+alias dc='docker compose'
+alias dcu='docker compose up'
+
+alias ld="lazydocker"
+alias lg="lazygit"
+
+# AI
+alias serena="/usr/bin/env uvx --from git+https://github.com/oraios/serena serena"
+alias claude-yolo="claude --dangerously-skip-permissions"
+alias tclaude="mkdir -p /tmp/claude && cd /tmp/claude && claude"
+alias ccstatusline="npx ccstatusline@latest"
+alias ccusage="npx -y ccusage"
+
+# Misc
+alias ff="fastfetch"
+
+# UVX
+alias kasa="/usr/bin/env uvx --from python-kasa kasa"
+
+# Just
+alias j="just"
+alias ju="just up"
+alias ji="just init"
+alias jb="just build"
+alias js="just status"

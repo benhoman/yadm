@@ -1,0 +1,9 @@
+session_name: cashared
+
+start_directory: ~/src/github.com/bhoman-ca/cashared
+
+windows:
+  - window_name: code
+  - window_name: ai
+  - window_name: infra
+  - window_name: docker

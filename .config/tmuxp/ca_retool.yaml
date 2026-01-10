@@ -1,0 +1,11 @@
+session_name: retool
+
+start_directory: ~/src/github.com/bhoman-ca/retool-custom-components
+
+windows:
+  - window_name: code
+  - window_name: ai
+  - window_name: infra
+  - window_name: docker
+  - window_name: git
+    shell_command: lazygit
