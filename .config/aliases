@@ -43,6 +43,8 @@ alias gwl="gw list"
 alias gwp="gw prune"
 alias gwr="gw remove"
 alias gcb='git checkout $(git branch | fzf)'
+alias gr="git rebase"
+alias grc="git rebase --continue"
 
 
 # Count files in directory
@@ -76,6 +78,7 @@ alias claude-yolo="claude --dangerously-skip-permissions"
 alias tclaude="mkdir -p /tmp/claude && cd /tmp/claude && claude"
 alias ccstatusline="npx ccstatusline@latest"
 alias ccusage="npx -y ccusage"
+alias oc="opencode"
 
 # Misc
 alias ff="fastfetch"
