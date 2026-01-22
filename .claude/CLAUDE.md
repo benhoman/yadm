@@ -63,38 +63,6 @@ After creating a pull request, **always** follow this workflow:
    PR URL: [PR Link]
    ```
 
-## Development Workflow - CA Helper Script
-
-For projects in `~/src/github.com/bhoman-ca/`, use the `ca` shell script instead of docker-compose commands:
-
-### Use `ca` Instead of Docker Compose
-
-- **Run tests**: `ca pytest` instead of `docker-compose run --rm django-brands-api pytest`
-- **Django shell**: `ca shell` instead of `docker-compose run --rm django-brands-api python manage.py shell`
-- **Run commands**: `ca run [command]` instead of `docker-compose run --rm django-brands-api [command]`
-- **Django management**: `ca manage [command]` instead of `docker-compose run --rm django-brands-api python manage.py [command]`
-
-### Available CA Commands
-
-The `ca` script provides these shortcuts:
-
-- `ca app` - Print determined app name
-- `ca bash` - Open bash shell
-- `ca build` - Build docker image
-- `ca manage` - Run manage.py commands
-- `ca migrate` - Run migrations
-- `ca makemigrations` - Run makemigrations
-- `ca shell` - Open django shell (uses shell_plus if available)
-- `ca test` - Run tests
-- `ca pytest` - Run tests with pytest
-- `ca run` - Run command in container
-
-### Why Use CA Script?
-
-- Automatically determines the correct service name
-- Handles running vs non-running container states
-- Provides consistent interface across CA projects
-- Located at `~/.local/bin/ca` and available in PATH
 
 ## JIRA Field Mappings
 
@@ -120,6 +88,13 @@ The `ca` script provides these shortcuts:
 ### Ticket Status Transitions
 
 - **Code Review** transition ID: `431` (use after creating PR)
+- **Optimization**: When transitioning AND updating fields (e.g., moving to Code Review + setting story points), use a single `transitionJiraIssue` call with the `fields` parameter instead of separate calls:
+  ```
+  transitionJiraIssue(
+      transition={"id": "431"},
+      fields={"customfield_12750": 0.5}  # BE Story Points (actual)
+  )
+  ```
 
 ### Ticket Creation Workflow
 

@@ -10,6 +10,7 @@
       "/home/bhoman/vaults/consumeraffairs/Tickets/Specs/"
     ]
   },
+  "model": "opus",
   "hooks": {
     "Notification": [
       {
@@ -29,6 +30,7 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "tsd-workflow@ca-marketplace": true
+    "tsd-workflow@ca-marketplace": true,
+    "worktree@ca-worktrees": true
   }
 }
