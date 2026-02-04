@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+title="${1:-Claude Code}"
+message="${2:-Awaiting your input}"
+
+if [ -n "$TMUX" ]; then
+    session=$(tmux display-message -p '#S')
+    message="TMUX: $session"$'\n'"$message"
+fi
+
+notify-send "$title" "$message"
