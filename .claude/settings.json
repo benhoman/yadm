@@ -4,7 +4,14 @@
       "Bash(ca ruff:*)",
       "Bash(ruff:*)",
       "Bash(ca pytest:*)",
-      "Bash(pytest:*)"
+      "Bash(pytest:*)",
+      "Bash(wt up:*)",
+      "Bash(wt info:*)",
+      "Bash(wt init:*)",
+      "Bash(wt ruff:*)",
+      "Bash(wt status:*)",
+      "Bash(wt test:*)",
+      "Skill(worktree:worktree)"
     ],
     "additionalDirectories": [
       "/home/bhoman/vaults/consumeraffairs/Tickets/Specs/"
@@ -18,7 +25,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "notify-send 'Claude Code' 'Awaiting your input'"
+            "command": "tmux-notify 'Claude Code' 'Awaiting your input'"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/home/bhoman/.claude/hooks/gsd-check-update.js\""
           }
         ]
       }

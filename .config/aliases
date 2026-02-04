@@ -32,6 +32,7 @@ alias .....="cd ../../../.."
 
 alias cpv='rsync -ah --info=progress2'
 # Git
+alias gpu="git pull upstream"
 alias gpuq="git pull upstream qa"
 alias cg='cd `git rev-parse --show-toplevel`' # cd root of git repo
 alias g="git"
