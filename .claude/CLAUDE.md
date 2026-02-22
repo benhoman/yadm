@@ -135,6 +135,56 @@ After creating a pull request, **always** follow this workflow:
 - Code blocks use `{"type": "text", "text": "code", "marks": [{"type": "code"}]}`
 - Headings use `{"type": "heading", "attrs": {"level": 3}, "content": [...]}`
 
+## Worktree Skill Priority
+
+When working in a worktree-enabled project (`.worktrees/config.toml` or `.worktree.toml` exists), **always prefer `wt` commands** over raw Docker/docker-compose/pytest/manage.py commands. The worktree skill handles project context, database routing, and Docker Compose profiles automatically.
+
+### Detection
+
+Before running tests, container operations, or framework commands, check if the project uses worktrees:
+```bash
+[ -f .worktrees/config.toml ] || [ -f .worktree.toml ]
+```
+
+### Command Mapping - Always Use `wt` Instead
+
+| Instead of | Use |
+|------------|-----|
+| `docker compose up -d` | `wt up` |
+| `docker compose down` | `wt down` |
+| `docker compose ps` | `wt ps` |
+| `docker compose logs` | `wt logs` |
+| `docker compose restart <svc>` | `wt restart <svc>` |
+| `docker compose build` | `wt build` |
+| `docker compose exec app pytest` | `wt test [args]` |
+| `docker compose exec app pytest --cov` | `wt coverage [args]` |
+| `docker compose exec app python manage.py migrate` | `wt migrate` |
+| `docker compose exec app python manage.py makemigrations` | `wt makemigrations` |
+| `docker compose exec app python manage.py shell_plus` | `wt shell` |
+| `docker compose exec app python manage.py <cmd>` | `wt manage <cmd>` |
+| `docker compose exec app bash` | `wt bash` |
+| `docker compose exec app <cmd>` | `wt run <cmd>` |
+| `docker compose exec app ruff check .` | `wt ruff check .` |
+| `docker compose exec app ruff format .` | `wt format` |
+| `psql -U postgres -d <db>` | `wt db shell` |
+| `psql -U postgres -d <db> -c "<sql>"` | `wt db exec "<sql>"` |
+
+### Additional `wt` Commands to Use
+
+- **`wt status`** - Check service health (prefer over `docker compose ps`)
+- **`wt health`** - Verify all services are healthy before running tests
+- **`wt watch`** - Follow logs with health checks filtered out
+- **`wt info`** - Show current worktree configuration
+- **`wt db mode`** - Show current database mode and connection info
+- **`wt clean`** - Clean up unused Docker resources
+- **`wt compose <args>`** - Passthrough for any docker compose command not covered above
+
+### Why This Matters
+
+- `wt` commands automatically handle Docker Compose project names, profiles, database modes, and environment isolation
+- Raw `docker compose` commands may target the wrong project or miss profile configuration
+- `wt test` and `wt migrate` dispatch to the correct framework adapter (Django/FastAPI)
+
 ## Git Staging Guidelines
 
 ### Explicit File Staging

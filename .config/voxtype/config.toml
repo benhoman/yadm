@@ -58,7 +58,8 @@ translate = false
 # Primary output mode: "type" or "clipboard"
 # - type: Simulates keyboard input at cursor position (requires ydotool)
 # - clipboard: Copies text to clipboard (requires wl-copy)
-mode = "type"
+mode = "paste"
+paste_keys = "shift+insert"
 
 # Fall back to clipboard if typing fails
 fallback_to_clipboard = true
@@ -87,11 +88,15 @@ on_recording_stop = false
 # Show notification with transcribed text after transcription completes
 on_transcription = false
 
-# [text]
+[text]
 # Text processing options (word replacements, spoken punctuation)
 #
 # Enable spoken punctuation conversion (e.g., say "period" to get ".")
-# spoken_punctuation = false
+spoken_punctuation = false
 #
 # Custom word replacements (case-insensitive)
 # replacements = { "hyperwhisper" = "hyprwhspr" }
+[text.replacements]
+"yolo" = "YoU oNlY lIvE oNcE"
+"slash PR." = "/pr"
+"slash PR" = "/pr"

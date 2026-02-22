@@ -1,6 +1,6 @@
 add_newline = true
 command_timeout = 200
-format = "[$directory$git_branch$git_status]($style)$character"
+format = "[$directory$git_branch$git_status$python]($style)$character"
 
 [character]
 error_symbol = "[✗](bold cyan)"
@@ -30,3 +30,15 @@ stashed    = ""
 staged     = ""
 renamed    = ""
 deleted    = ""
+
+[python]
+symbol = "🐍 "
+pyenv_version_name = true
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "bold yellow"
+pyenv_prefix = "pyenv "
+python_binary = ["python3", "python", "python2"]
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
+detect_folders = []
+disabled = false
