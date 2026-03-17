@@ -100,3 +100,11 @@ spoken_punctuation = false
 "yolo" = "YoU oNlY lIvE oNcE"
 "slash PR." = "/pr"
 "slash PR" = "/pr"
+
+[meeting]
+enabled = true
+
+[meeting.summary]
+backend = "local"  # or "remote"
+ollama_url = "http://localhost:11434"
+ollama_model = "llama3.2"

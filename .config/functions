@@ -118,3 +118,25 @@ function tmux_attach() {
 }
 
 function ta { tmux_attach "$@"; }
+
+# VoxType meeting mode shortcut
+mtg() {
+  case "$1" in
+    ""|status) voxtype meeting status ;;
+    start)
+      shift
+      if [[ -n "$*" ]]; then
+        voxtype meeting start --title "$*"
+      else
+        voxtype meeting start
+      fi
+      ;;
+    stop|pause|resume|list) voxtype meeting "$1" ;;
+    show)   voxtype meeting show "${2:-latest}" ;;
+    export) voxtype meeting export "${2:-latest}" "${@:3}" ;;
+    sum)    voxtype meeting summarize "${2:-latest}" ;;
+    del)    voxtype meeting delete "$2" ;;
+    label)  voxtype meeting label "${@:2}" ;;
+    *)      voxtype meeting "$@" ;;
+  esac
+}

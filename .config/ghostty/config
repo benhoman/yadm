@@ -36,3 +36,6 @@ keybind = shift+enter=text:\x1b\r
 
 # Workaround for https://github.com/anthropics/claude-code/issues/16730
 keybind = shift+space=text:\x20
+
+# Fix general slowness on hyprland (https://github.com/ghostty-org/ghostty/discussions/3224)
+async-backend = epoll

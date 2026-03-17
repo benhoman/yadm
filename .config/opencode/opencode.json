@@ -1,22 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
-  "snapshot": false,
-  "mcp": {
-    "atlassian": {
-      "type": "remote",
-      "url": "https://mcp.atlassian.com/v1/sse",
-      "oauth": {
-        "scope": "tools:read"
-      }
-    }
-  },
-  "permission": {
-    "read": {
-      "~/.config/opencode/get-shit-done/*": "allow"
-    },
-    "external_directory": {
-      "~/.config/opencode/get-shit-done/*": "allow"
-    }
-  }
+  "autoupdate": false
 }
